@@ -1,0 +1,83 @@
+<script src="../src/html2json.js"></script>
+<textarea id="text">
+
+  
+
+<div id="db-sites">
+    <div class="hd">
+        
+    <h2>
+        发现小站
+         &nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;
+            <span class="pl">&nbsp;(
+                <a href="http://www.douban.com/explore/site/">更多</a>
+            ) </span>
+    </h2>
+
+    </div>
+    <div class="bd">
+        <div class="content">
+            
+        <div class="item">
+            <div class="pic">
+                <a href="http://site.douban.com/130913/">
+                    <img src="http://img1.douban.com/view/site/median/public/e00cd6bf70258d1.jpg" alt="壁球来了" width="75" height="75" />
+                </a>
+            </div>
+            <div class="info">
+                <h3><a href="http://site.douban.com/130913/">壁球来了</a></h3>
+                1625人喜欢
+                <p>壁球 ，因球在猛烈触及墙壁时发出类似英文“SQUASH...</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <a href="http://site.douban.com/107803/">
+                    <img src="http://img3.douban.com/view/site/median/public/00c717160e066cf.jpg" alt="电影：好·坏·丑" width="75" height="75" />
+                </a>
+            </div>
+            <div class="info">
+                <h3><a href="http://site.douban.com/107803/">电影：好·坏·丑</a></h3>
+                74304人喜欢
+                <p>好电影推荐！
+坏电影不看！
+邪典、CULT、B级片！
+...</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <a href="http://site.douban.com/108149/">
+                    <img src="http://img3.douban.com/view/site/median/public/c09f73c27e85efc.jpg" alt="闽南语正字促进会" width="75" height="75" />
+                </a>
+            </div>
+            <div class="info">
+                <h3><a href="http://site.douban.com/108149/">闽南语正字促进会</a></h3>
+                2863人喜欢
+                <p>闽南语拼音及正字教学，闽南语正字文学创作，闽南...</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <a href="http://site.douban.com/106491/">
+                    <img src="http://img3.douban.com/view/site/median/public/f2350956ef2b88a.jpg" alt="苹果迷" width="75" height="75" />
+                </a>
+            </div>
+            <div class="info">
+                <h3><a href="http://site.douban.com/106491/">苹果迷</a></h3>
+                70645人喜欢
+                <p>本小站介绍苹果公司相关产品。快来关注 Mac OS X L...</p>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+</textarea>
+<script>
+var text = document.getElementById('text').value;
+var result = html2json(text);
+document.write(result);
+</script>
