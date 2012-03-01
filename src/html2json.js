@@ -25,7 +25,7 @@ this.html2json = (function() {
 							obj.attr[item.attributes[n].name] = item.attributes[n].value;
 						}
 					}
-					if (item.childNodes.length <= 1) {
+					if (item.childNodes.length < 1) {
 						obj.text = item.innerText;
 					} else {
 						obj.child = Util.getJson(item.childNodes);

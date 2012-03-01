@@ -48,7 +48,7 @@ this.html2json1 = (function() {
 						obj.push(attr.join(','));
 					}
 					obj.push('},');
-					if (item.childNodes.length == 1) {
+					if (item.childNodes.length < 1) {
 						obj.push('"text"', Util.quote(item.innerText));
 					} else {
 						obj.push('"child":', Util.getJson(item.childNodes));

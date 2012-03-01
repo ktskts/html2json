@@ -4,16 +4,14 @@
  * 将JSON转化为HTML
  * 一种用于富文本数据传输的解决方案
  * JSON格式为：
- * [
- * {
+ * [{
  * "tag": "span",
  * "attr": {"id":"welefen", "class":"suredy"},
  * "text":"haha",
  * "child": [
- * ....
- * ]
- * }
- * ]
+ * 		...
+ * 	]
+ * }, ...]
  * @author welefen
  * @license MIT
  * @version 1.0
@@ -28,20 +26,20 @@ class json2html {
 	public $json = '';
 	/**
 	 * 
-	 * 是否对不在白名单里的标签属性进行过滤
-	 * @var boolean
+	 * 选项
+	 * @var array
 	 */
-	public $checkTagAttr = true;
+	public $options = array ("checkTag" => true, "checkAttr" => true, "maxAttrValueLength" => 50, "filterValue" => true );
 	/**
 	 * 
-	 * 标签名正则
-	 * @var string
+	 * 标签白名单
+	 * @var array
 	 */
-	public $tagPattern = "/^([A-Za-z\!]{1}[A-Za-z0-9\!]*)$/";
+	public $tagBlankList = array ("a", "span", "img", "p", "br", "div", "strong", "b", "ul", "li", "ol" );
 	/**
 	 * 标签属性白名单
 	 */
-	private $_attrBlankList = array ("*" => array ("id", "class", "name" ), "a" => array ("href" ), "img" => array ("width", "src", "height", "alt" ) );
+	public $attrBlankList = array ("*" => array ("id", "class", "name", "style" ), "a" => array ("href", "title" ), "img" => array ("width", "src", "height", "alt" ) );
 	/**
 	 * 
 	 * 单一标签
@@ -57,40 +55,68 @@ class json2html {
 	 */
 	public function __construct($json = '', $options = array()) {
 		$this->json = $json;
-		$this->_attrBlankList = array_merge ( $this->_attrBlankList, $options );
+		$this->options = array_merge ( $this->options, $options );
+	}
+	/**
+	 * 
+	 * 添加标签白名单
+	 * @param string or array $tag
+	 */
+	public function addTagBlank($tag) {
+		if (! is_array ( $tag )) {
+			$tag = array ($tag );
+		}
+		$this->tagBlankList = array_merge ( $this->tagBlankList, $tag );
+	}
+	/**
+	 * 
+	 * 移除标签白名单
+	 * @param string or array $tag
+	 */
+	public function removeTagBlank($tag) {
+		if (! is_array ( $tag )) {
+			$tag = array ($tag );
+		}
+		$result = array ();
+		foreach ( $this->tagBlankList as $item ) {
+			if (! in_array ( $item, $tag )) {
+				$result [] = $item;
+			}
+		}
+		$this->tagBlankList = $result;
 	}
 	/**
 	 * 
 	 * 添加标签属性白名单
 	 */
-	public function addBlank($tag, $attr) {
-		$tagAttrs = $this->_attrBlankList [$tag];
+	public function addAttrBlank($tag, $attr) {
+		$tagAttrs = $this->attrBlankList [$tag];
 		if (! $tagAttrs) {
 			$tagAttrs = array ();
 		}
 		if (! is_array ( $attr )) {
 			$attr = array ($attr );
 		}
-		$this->_attrBlankList [$tag] = array_merge ( $tagAttrs, $attr );
+		$this->attrBlankList [$tag] = array_merge ( $tagAttrs, $attr );
 	}
 	/**
 	 * 
 	 * 移除标签属性白名单
 	 */
-	public function removeBlank($tag, $attr) {
-		if (! array_key_exists ( $tag, $this->_attrBlankList )) {
+	public function removeAttrBlank($tag, $attr) {
+		if (! array_key_exists ( $tag, $this->attrBlankList )) {
 			return true;
 		}
 		if (! is_array ( $attr )) {
 			$attr = array ($attr );
 		}
 		$attrs = array ();
-		foreach ( $this->_attrBlankList [$tag] as $item ) {
+		foreach ( $this->attrBlankList [$tag] as $item ) {
 			if (! in_array ( $item, $attr )) {
 				$attrs [] = $item;
 			}
 		}
-		$this->_attrBlankList [$tag] = $attrs;
+		$this->attrBlankList [$tag] = $attrs;
 	}
 	/**
 	 * 
@@ -122,7 +148,7 @@ class json2html {
 				$result [] = $item ['text'];
 				continue;
 			}
-			if (! $this->isTag ( $tag )) {
+			if ($this->options ['checkTag'] && ! $this->checkTagName ( $tag )) {
 				continue;
 			}
 			//标签节点
@@ -131,8 +157,14 @@ class json2html {
 				$attrs = array ();
 				foreach ( $item ['attr'] as $name => $value ) {
 					//如果标签属性不合法，直接过滤
-					if (! $this->checkTagAttr ( $tag, $name )) {
+					if ($this->options ['checkAttr'] && ! $this->checkTagAttr ( $tag, $name )) {
 						continue;
+					}
+					if ($this->options ['filterValue']) {
+						$value = $this->filterAttrValue ( $value );
+					}
+					if ($this->options ['maxAttrValueLength'] && strlen ( $value ) > $this->options ['maxAttrValueLength']) {
+						$value = substr ( $value, 0, $this->options ['maxAttrValueLength'] );
 					}
 					$attrs [] = $name . '="' . $this->escapeHtml ( $value ) . '"';
 				}
@@ -141,7 +173,7 @@ class json2html {
 			if (in_array ( $tag, $this->singleTag )) {
 				$text .= '/>';
 			} else {
-				$text .= '>'. $item['text'];
+				$text .= '>' . $item ['text'];
 				if (count ( $item ['child'] )) {
 					$text .= $this->toHtml ( $item ['child'] );
 				}
@@ -153,18 +185,26 @@ class json2html {
 	}
 	/**
 	 * 
+	 * 检测标签名是否合法
+	 * @param string $tag
+	 */
+	public function checkTagName($tag) {
+		return in_array ( $tag, $this->tagBlankList );
+	}
+	/**
+	 * 
 	 * 检测标签的属性是否合法
 	 * @param string $tag
-	 * @param string $attr
+	 * @param string $attrName
 	 */
-	public function checkTagAttr($tag, $attr) {
-		$tagAttr = $this->_attrBlankList [$tag];
-		$attrList = $this->_attrBlankList ['*'];
+	public function checkTagAttr($tag, $attrName) {
+		$tagAttr = $this->attrBlankList [$tag];
+		$attrList = $this->attrBlankList ['*'];
 		if ($tagAttr) {
 			$attrList = array_merge ( $attrList, $tagAttr );
 		}
-		$attr = strtolower ( $attr );
-		return in_array ( $attr, $attrList );
+		$attrName = strtolower ( $attrName );
+		return in_array ( $attrName, $attrList );
 	}
 	/**
 	 * 
@@ -176,10 +216,14 @@ class json2html {
 	}
 	/**
 	 * 
-	 * 检测标签名是否合法
-	 * @param string $tag
+	 * 过滤属性值
+	 * @param string $value
 	 */
-	public function isTag($tag) {
-		return preg_match ( $this->tagPattern, $tag );
+	public function filterAttrValue($value = '') {
+		//移除expression
+		$value = preg_replace ( "/\:\s*expression\s*\(/ies", "", $value );
+		//移除base64编码
+		$value = preg_replace ( "/\+[a-z0-9]+\-/ies", "", $value );
+		return $value;
 	}
 }
