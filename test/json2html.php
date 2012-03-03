@@ -1,10 +1,15 @@
 <?php
 require_once '../src/json2html.class.php';
-$jsonFile = 'json/1.json';
 $startTime = microtime(true);
-$json = file_get_contents($jsonFile);
+$json = $_POST['content'];
+if (get_magic_quotes_gpc()){
+	$json = stripslashes($json);
+}
+$startTime = microtime(true);
 $instance = new JSON2HTML($json);
 $result = $instance->run();
-echo $result;
 $endTime = microtime(true);
-echo ($endTime - $startTime);
+$time = ($endTime - $startTime)*1000;
+$time = number_format($time, 2);
+$output = array('time'=> $time, 'text'=> $result);
+echo json_encode($output);

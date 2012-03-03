@@ -4,7 +4,7 @@
  * @author welefen
  * @lincense MIT
  */
-this.html2json1 = (function() {
+this.html2json = (function() {
 	var Util = {
 		div : null,
 		escapable : /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
@@ -42,7 +42,7 @@ this.html2json1 = (function() {
 					if (item.attributes.length) {
 						attr = [];
 						for ( var n = 0, l = item.attributes.length; n < l; n++) {
-							attr.push(Util.quote(item.attributes[n].name), ':',
+							attr.push(Util.quote(item.attributes[n].name)+ ':'+
 									Util.quote(item.attributes[n].value));
 						}
 						obj.push(attr.join(','));
@@ -53,7 +53,7 @@ this.html2json1 = (function() {
 					} else {
 						obj.push('"child":', Util.getJson(item.childNodes));
 					}
-					obj.push(']');
+					obj.push('}');
 					result.push(obj.join(''));
 				} else {
 					// do nothing
