@@ -12,7 +12,7 @@
 </textarea>
 <div style="text-align:center"><button id="save" style="padding:7px 15px;font-size:24px;line-height:24px">保存</button></div>
 <div style="margin-top:20px;border-top:1px solid #ddd;padding-top:10px">
-相关数据：&nbsp;&nbsp;&nbsp;&nbsp;<span id="textLength" style="color:#ccc"></span><span id="jsonTime" style="color:#ccc;margin-left:10px"></span><span id="htmlTime" style="color:#ccc;margin-left:10px;"></span>
+相关数据：&nbsp;&nbsp;&nbsp;&nbsp;<span id="textLength" style="color:#ccc"></span><span id="jsonLength" style="color:#ccc;margin-left:10px;"></span><span id="jsonTime" style="color:#ccc;margin-left:10px"></span><span id="htmlTime" style="color:#ccc;margin-left:10px;"></span>
 </div>
 <div style="margin-top:10px;">
 转化后的JSON数据：
@@ -33,6 +33,7 @@
 <textarea id="fontText"><div style="text-align: center;"></div><em>清华<span style="font-family:Comic Sans MS">大<span style="background-color: rgb(230, 138, 138); font-family: 'Comic Sans MS'; ">学里非常</span><strong><span style="background-color: rgb(230, 138, 138); font-family: 'Comic Sans MS'; ">珍</span></strong></span><strong><span style="background-color:#e68a8a">贵的一堂</span><span style="font-size:32px"><span style="background-color: rgb(230, 138, 138); font-size: 32px; ">营销</span><span style="background-color: rgb(230, 138, 138); color: rgb(255, 0, 0); font-size: 32px; ">课</span></span></strong></em><strong><span style="font-size:32px"><span style="color: rgb(255, 0, 0); font-size: 32px; ">,先</span><u><span style="color: rgb(255, 0, 0); font-size: 32px; ">收</span>藏了<a href="http://www.baidu.com" target="_blank">再</a></u></span><a href="http://www.baidu.com" target="_blank"><u>看 （视频有点长</u></a></strong><a href="http://www.baidu.com" target="_blank"><u>，50</u></a><u>多分钟）</u></textarea>
 </div>
 <script type="text/javascript" src="http://img.baidu.com/js/tangram-base-1.5.2.js"></script>
+<script type="text/javascript" src="../tools/json2.js"></script>
 <script type="text/javascript" src="../src/html2json.js"></script>
 <script>
 baidu.dom.ready(function(){
@@ -59,6 +60,7 @@ baidu.dom.ready(function(){
 		var endTime = new Date();
 		baidu.g('jsonTime').innerHTML = 'HTML2JSON时间：' + (endTime - startTime)+ 'ms'
 		baidu.g('json').value = value;
+		baidu.g('jsonLength').innerHTML = 'JSON长度：'+ value.length;
 		baidu.g('save').disabled = true;
 		baidu.ajax.post("./json2html.php",baidu.url.jsonToQuery({
 			content: value
