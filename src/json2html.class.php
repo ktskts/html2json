@@ -56,7 +56,7 @@ class json2html {
 	 */
 	public $tagBlankList = array (
 		"a", "span", "img", "p", "br", 
-		"div", "strong", "b", "ul", "li", "ol", "embed","object","param" 
+		"div", "strong", "b", "ul", "li", "ol", "embed","object","param", "u" 
 	);
 	/**
 	 * 标签属性白名单

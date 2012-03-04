@@ -29,12 +29,11 @@
 <div style="display:none">
 <textarea id="normalText"><div>welefen</div></textarea>
 <textarea id="specialText"><div>「」『』〖〗【】∵∴♂♀¤￠￡§№☆★○●◎◇◆□■△▲※→←↑↓〓〡〢〣〤〥〦〧〨〩㊣︰⒈⒉⒊⒋⒌⒍⒎⒏⒐⒑⒒⒓⒔⒕⒖⒗⒘⒙⒚⒛￢￤℡ˊˋ˙‥↖↗↘↙∟▅▆▇█▉▊▋▌▍▎▏▓╳╱╲╯╰╮╭fasdfasdfasdfasdf☏fasdfadfs</div></textarea>
-<textarea id="videoText"><embed src="http://player.youku.com/player.php/partnerid/XMTAwNA==/sid/XMjk4MDcxNjAw/v.swf" width="480" height="400" allowscriptaccess="never" id="__video__" type="application/x-shockwave-flash" />			</td></tr></table></div>清华大学里非常珍贵的一堂营销课,先收藏了再看 （视频有点长，50多分钟）</div></table><br><div class=opt id=blogOpt></textarea>
+<textarea id="videoText"><embed src="http://player.youku.com/player.php/partnerid/XMTAwNA==/sid/XMjk4MDcxNjAw/v.swf" width="480" height="400" allowscriptaccess="never" id="__video__" type="application/x-shockwave-flash" /></textarea>
 <textarea id="fontText"><div style="text-align: center;"></div><em>清华<span style="font-family:Comic Sans MS">大<span style="background-color: rgb(230, 138, 138); font-family: 'Comic Sans MS'; ">学里非常</span><strong><span style="background-color: rgb(230, 138, 138); font-family: 'Comic Sans MS'; ">珍</span></strong></span><strong><span style="background-color:#e68a8a">贵的一堂</span><span style="font-size:32px"><span style="background-color: rgb(230, 138, 138); font-size: 32px; ">营销</span><span style="background-color: rgb(230, 138, 138); color: rgb(255, 0, 0); font-size: 32px; ">课</span></span></strong></em><strong><span style="font-size:32px"><span style="color: rgb(255, 0, 0); font-size: 32px; ">,先</span><u><span style="color: rgb(255, 0, 0); font-size: 32px; ">收</span>藏了<a href="http://www.baidu.com" target="_blank">再</a></u></span><a href="http://www.baidu.com" target="_blank"><u>看 （视频有点长</u></a></strong><a href="http://www.baidu.com" target="_blank"><u>，50</u></a><u>多分钟）</u></textarea>
 </div>
-<script type="text/javascript" src="http://img.baidu.com/js/tangram-base-1.5.2.js"></script>
-<script type="text/javascript" src="../tools/json2.js"></script>
-<script type="text/javascript" src="../src/html2json.js"></script>
+<script type="text/javascript" src="http://img.baidu.com/js/tangram-base-1.5.2.js" encoding="utf-8"></script>
+<script type="text/javascript" src="../src/html2json.js?v=14"></script>
 <script>
 baidu.dom.ready(function(){
 	baidu.on('textStyle', 'click', function(event){
@@ -55,9 +54,9 @@ baidu.dom.ready(function(){
 			content.focus();
 		}
 		baidu.g('textLength').innerHTML = '富文本长度：'+ value.length;
-		var startTime = new Date();
-		value = html2json(value);
-		var endTime = new Date();
+		var startTime = new Date()*1;
+		value = html2json(value, baidu.json.stringify);
+		var endTime = new Date()*1;
 		baidu.g('jsonTime').innerHTML = 'HTML2JSON时间：' + (endTime - startTime)+ 'ms'
 		baidu.g('json').value = value;
 		baidu.g('jsonLength').innerHTML = 'JSON长度：'+ value.length;
