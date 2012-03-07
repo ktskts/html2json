@@ -36,7 +36,7 @@ this.html2json = (function() {
 								var attrNode = item.attributes[attrs[j]];
 								if(attrNode && attrNode.nodeType === 2){
 									var value = attrNode.value;
-									if(value){
+									if(value && value != 'null'){
 										obj.attr[attrs[j]] = value;
 										flag = true;
 									}

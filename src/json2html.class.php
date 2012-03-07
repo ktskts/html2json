@@ -56,7 +56,7 @@ class json2html {
 	 */
 	public $tagBlankList = array (
 		"a", "span", "img", "p", "br", 
-		"div", "strong", "b", "ul", "li", "ol", "embed","object","param", "u" 
+		"div", "strong", "b", "ul", "li", "ol", "embed","object","param", "u", "em" 
 	);
 	/**
 	 * 标签属性白名单
@@ -127,6 +127,14 @@ class json2html {
 	public function __construct($json = '', $options = array()) {
 		$this->json = $json;
 		$this->options = array_merge ( $this->options, $options );
+		$this->init();
+	}
+	/**
+	 * init method
+	 * @return [null]
+	 */
+	public function init(){
+
 	}
 	/**
 	 * 
@@ -230,6 +238,9 @@ class json2html {
 			if ($childTag && array_key_exists($childTag, $mustChild)){
 				$mustAttrs = $mustChild[$childTag];
 				$attrs = & $item['attr'];
+				if(!is_array($attrs)){
+					$attrs = array();
+				}
 				foreach ($mustAttrs as $k => $it){
 					$where = $it['where'];
 					$addValue = $it['value'];

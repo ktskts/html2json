@@ -1,1 +1,1 @@
-[{"tag":"div","attr":{"style":"font-size:12px;xxx:expression(alert(1));font-family:xwel;"},"child":[{"text":"welefen"}]},{"text":"\n"}]
+[{"tag":"embed","attr":{"src":"http://player.youku.com/player.php/partnerid/XMTAwNA==/sid/XMjk4MDcxNjAw/v.swf","width":"480","height":"400","allowscriptaccess":"allways","id":"__video__","type":"application/x-shockwave-flash"}}]
