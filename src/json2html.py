@@ -59,7 +59,7 @@ class json2html:
 	# style value blank pattern
 	styleValueBlankList =  {
 		'font-family' : "^(.){2,20}$", 
-		'font-size' : "^\d+[a-z]{2,5}$", 
+		'font-size' : "^\d+(?:[a-z]{2,5})?$", 
 		"color" : "^(rgb\s*\(\d+\s*,\s*\d+\s*,\s*\d+\))|(\#[0-9a-f]{6})$",
 		"text-align" : ["left", "right", "center"],
 		"background-color" : "^(rgb\s*\(\d+\s*,\s*\d+\s*,\s*\d+\))|(\#[0-9a-f]{6})$",
