@@ -1,0 +1,13 @@
+[
+    {
+        "attr": {
+            "allowscriptaccess": "never",
+            "height": "400",
+            "id": "__video__",
+            "src": "http://player.youku.com/player.php/partnerid/XMTAwNA==/sid/XMjk4MDcxNjAw/v.swf",
+            "type": "application/x-shockwave-flash",
+            "width": "480"
+        },
+        "tag": "embed"
+    }
+]

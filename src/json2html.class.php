@@ -76,7 +76,7 @@ class json2html {
 	 */
 	public $styleValueBlankList = array (
 		'font-family' => "/^(.){2,20}$/", 
-		'font-size' => "/^\d+[a-z]{2,5}$/", 
+		'font-size' => "/^\d+(?:[a-z]{2,5})?$/", 
 		"color" => "/^(rgb\s*\(\d+\s*,\s*\d+\s*,\s*\d+\))|(\#[0-9a-f]{6})$/",
 		"text-align" => array("left", "right", "center"),
 		"background-color" => "/^(rgb\s*\(\d+\s*,\s*\d+\s*,\s*\d+\))|(\#[0-9a-f]{6})$/",
@@ -375,7 +375,7 @@ class json2html {
 			$mix = explode ( ":", $item, 2 );
 			$name = strtolower ( trim ( $mix [0] ) );
 			$val = trim ( $mix [1] );
-			if (! $name || ! $val || ! array_key_exists ( $name, $this->styleValueBlankList )) {
+			if (! $name || ! strlen($val) || ! array_key_exists ( $name, $this->styleValueBlankList )) {
 				continue;
 			}
 			$pattern = $this->styleValueBlankList [$name];

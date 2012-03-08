@@ -1,1 +1,197 @@
-[{"tag":"embed","attr":{"src":"http://player.youku.com/player.php/partnerid/XMTAwNA==/sid/XMjk4MDcxNjAw/v.swf","width":"480","height":"400","allowscriptaccess":"allways","id":"__video__","type":"application/x-shockwave-flash"}}]
+[
+    {
+        "attr": {
+            "style": "text-align: center;"
+        },
+        "tag": "div"
+    },
+    {
+        "child": [
+            {
+                "text": "清华"
+            },
+            {
+                "attr": {
+                    "style": "font-family:Comic Sans MS"
+                },
+                "child": [
+                    {
+                        "text": "大"
+                    },
+                    {
+                        "attr": {
+                            "style": "background-color: rgb(230, 138, 138); font-family: 'Comic Sans MS'; "
+                        },
+                        "child": [
+                            {
+                                "text": "学里非常"
+                            }
+                        ],
+                        "tag": "span"
+                    },
+                    {
+                        "child": [
+                            {
+                                "attr": {
+                                    "style": "background-color: rgb(230, 138, 138); font-family: 'Comic Sans MS'; "
+                                },
+                                "child": [
+                                    {
+                                        "text": "珍"
+                                    }
+                                ],
+                                "tag": "span"
+                            }
+                        ],
+                        "tag": "strong"
+                    }
+                ],
+                "tag": "span"
+            },
+            {
+                "child": [
+                    {
+                        "attr": {
+                            "style": "background-color:#e68a8a"
+                        },
+                        "child": [
+                            {
+                                "text": "贵的一堂"
+                            }
+                        ],
+                        "tag": "span"
+                    },
+                    {
+                        "attr": {
+                            "style": "font-size:32px"
+                        },
+                        "child": [
+                            {
+                                "attr": {
+                                    "style": "background-color: rgb(230, 138, 138); font-size: 32px; "
+                                },
+                                "child": [
+                                    {
+                                        "text": "营销"
+                                    }
+                                ],
+                                "tag": "span"
+                            },
+                            {
+                                "attr": {
+                                    "style": "background-color: rgb(230, 138, 138); color: rgb(255, 0, 0); font-size: 32px; "
+                                },
+                                "child": [
+                                    {
+                                        "text": "课"
+                                    }
+                                ],
+                                "tag": "span"
+                            }
+                        ],
+                        "tag": "span"
+                    }
+                ],
+                "tag": "strong"
+            }
+        ],
+        "tag": "em"
+    },
+    {
+        "child": [
+            {
+                "attr": {
+                    "style": "font-size:32px"
+                },
+                "child": [
+                    {
+                        "attr": {
+                            "style": "color: rgb(255, 0, 0); font-size: 32px; "
+                        },
+                        "child": [
+                            {
+                                "text": ",先"
+                            }
+                        ],
+                        "tag": "span"
+                    },
+                    {
+                        "child": [
+                            {
+                                "attr": {
+                                    "style": "color: rgb(255, 0, 0); font-size: 32px; "
+                                },
+                                "child": [
+                                    {
+                                        "text": "收"
+                                    }
+                                ],
+                                "tag": "span"
+                            },
+                            {
+                                "text": "藏了"
+                            },
+                            {
+                                "attr": {
+                                    "href": "http://www.baidu.com",
+                                    "target": "_blank"
+                                },
+                                "child": [
+                                    {
+                                        "text": "再"
+                                    }
+                                ],
+                                "tag": "a"
+                            }
+                        ],
+                        "tag": "u"
+                    }
+                ],
+                "tag": "span"
+            },
+            {
+                "attr": {
+                    "href": "http://www.baidu.com",
+                    "target": "_blank"
+                },
+                "child": [
+                    {
+                        "child": [
+                            {
+                                "text": "看 （视频有点长"
+                            }
+                        ],
+                        "tag": "u"
+                    }
+                ],
+                "tag": "a"
+            }
+        ],
+        "tag": "strong"
+    },
+    {
+        "attr": {
+            "href": "http://www.baidu.com",
+            "target": "_blank"
+        },
+        "child": [
+            {
+                "child": [
+                    {
+                        "text": "，50"
+                    }
+                ],
+                "tag": "u"
+            }
+        ],
+        "tag": "a"
+    },
+    {
+        "child": [
+            {
+                "text": "多分钟）"
+            }
+        ],
+        "tag": "u"
+    }
+]
