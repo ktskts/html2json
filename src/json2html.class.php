@@ -48,6 +48,7 @@ class json2html {
 		"escapeHtml" => true, 	//是否进行html转码
 		"tagAttrRequired" => true, //标签必须包含的属性
 		"tagChildRequired" => true, //标签必须包含的子元素
+		"removeTagWithEmptyAttrs" => true, //当没有属性时删除这个标签
 	);
 	/**
 	 * 
@@ -69,6 +70,8 @@ class json2html {
 		"embed" => array("width", "height", "allowscriptaccess", "type", "src"),
 		"param" => array("allowscriptaccess"),
 	);
+
+	public $removeTagWithEmptyAttrsList = array('img');
 	/**
 	 * 
 	 * 标签里style值的白名单
@@ -177,9 +180,15 @@ class json2html {
 					continue;
 				}
 				$value = $this->filterAttrValue ( $value, $name, $tag );
-				$attrs [] = $name . '="' . $this->escapeHtml ( $value ) . '"';
+				if($value !== false){
+					$attrs [] = $name . '="' . $this->escapeHtml ( $value ) . '"';
+				}
+			}
+			if($this->options['removeTagWithEmptyAttrs'] && count($attrs) == 0 && in_array($tag, $this->removeTagWithEmptyAttrsList)){
+				continue;
 			}
 			$text .= ' ' . join ( ' ', $attrs );
+			$text = rtrim($text);
 			if (in_array ( $tag, $this->singleTag )) {
 				$text .= '/>';
 			} else {
@@ -305,7 +314,10 @@ class json2html {
 			return true;
 		}
 		$tagAttr = $this->attrBlankList [$tag];
-		$attrList = $this->attrBlankList ['*'];
+		$attrList = array();
+		if(isset($this->attrBlankList ['*'])){
+			$attrList = $this->attrBlankList ['*'];
+		}
 		if ($tagAttr) {
 			$attrList = array_merge ( $attrList, $tagAttr );
 		}
