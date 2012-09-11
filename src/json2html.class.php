@@ -70,7 +70,10 @@ class json2html {
 		"embed" => array("width", "height", "allowscriptaccess", "type", "src"),
 		"param" => array("allowscriptaccess"),
 	);
-
+	/**
+	 * [$removeTagWithEmptyAttrsList 当过滤后的属性为空时删除该标签的列表]
+	 * @var array
+	 */
 	public $removeTagWithEmptyAttrsList = array('img');
 	/**
 	 * 
