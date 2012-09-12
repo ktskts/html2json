@@ -347,6 +347,8 @@ class json2html {
 		if (! $this->options ['filterAttrValue']) {
 			return $value;
 		}
+		//remove - & _ in attrname
+		$attrName = preg_replace("/[\-\_]/i", "", $attrName);
 		$method = '_filter' . $attrName . 'AttrValue';
 		if (method_exists ( $this, $method )) {
 			return $this->$method ( $value, $tag );
@@ -453,7 +455,7 @@ class json2html {
 	 * @param string or array $attr
 	 * @param string $tag
 	 */
-	public function addAttrBlank($attr, $tag = ''){
+	public function addAttrBlank($attr, $tag = '＊'){
 		if (! $tag){
 			$tag = '*';
 		}
@@ -472,7 +474,7 @@ class json2html {
 	 * @param string or array $attr
 	 * @param string $tag
 	 */
-	public function removeAttrBlank($attr, $tag = ''){
+	public function removeAttrBlank($attr, $tag = '＊'){
 		if (! $tag){
 			$tag = '*';
 		}
